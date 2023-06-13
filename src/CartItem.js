@@ -46,6 +46,7 @@ class CartItem extends React.Component {
     }
     
     render (){
+        
         const { price,title, qty } = this.state;   //object destucturing
         return(
             <div className="cart-item">
