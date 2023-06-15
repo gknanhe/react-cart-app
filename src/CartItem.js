@@ -3,17 +3,17 @@ import React from "react";
 
 
 class CartItem extends React.Component {
-    constructor(){
-        super(); // to call the constructor of inherited class (React. Componant)
-        this.state = {
-            price: 999,
-            title: "Mobile Phone",
-            qty: 1,
-            img: '',
-        }
-        // this.increaseQuantity = this.increaseQuantity.bind(this)   //can also work but messi
+    // constructor(){
+    //     super(); // to call the constructor of inherited class (React. Componant)
+    //     this.state = {
+    //         price: 999,
+    //         title: "Mobile Phone",
+    //         qty: 1,
+    //         img: '',
+    //     }
+    //     // this.increaseQuantity = this.increaseQuantity.bind(this)   //can also work but messi
        
-    }
+    // }
 
     //Arrow functions asig this (.bind(this)) 
     increaseQuantity= () => {
@@ -46,8 +46,8 @@ class CartItem extends React.Component {
     }
     
     render (){
-        
-        const { price,title, qty } = this.state;   //object destucturing
+        console.log(this.props);
+        const { price,title, qty } = this.props.product;   //object destucturing
         return(
             <div className="cart-item">
                 <div className="left-block"> 
