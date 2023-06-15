@@ -32,16 +32,28 @@ class Cart extends React.Component {
             ]
            
         }
-        // this.increaseQuantity = this.increaseQuantity.bind(this)   //can also work but messi
        
     }
-    
+    //Handle increse Quantity
+    handleIncreaseQuantity = (product) => {
+        console.log('Hey plz increase the quantity of ', product);
+        const {products} = this.state;
+        const index = products.indexOf(product);
+        products[index].qty += 1;
+
+        //setState 
+        this.setState({
+            products: products,
+        })
+       }
+
     render(){
+
         const {products} = this.state;
         return(
             <div className="cart">
                 { products.map((product) => {
-                    return  <CartItem product = {product} key={product.id} />
+                    return  <CartItem product = {product} key={product.id} onIncreaseQuantity = {this.handleIncreaseQuantity} />
                     })
                 }
                 

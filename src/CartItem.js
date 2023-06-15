@@ -16,21 +16,21 @@ class CartItem extends React.Component {
     // }
 
     //Arrow functions asig this (.bind(this)) 
-    increaseQuantity= () => {
-        console.log('this.state',this.state);
-        //setState form -1
-        // this.setState({
-        //     qty: this.state.qty + 1
-        // })
+    // increaseQuantity= () => {
+    //     console.log('this.state',this.state);
+    //     //setState form -1
+    //     // this.setState({
+    //     //     qty: this.state.qty + 1
+    //     // })
 
-        //setState form -2 -> use this if prev value required
-        this.setState((prevState) => {
-            return {
-                qty: prevState.qty + 1 ,
-            }
-        })
+    //     //setState form -2 -> use this if prev value required
+    //     this.setState((prevState) => {
+    //         return {
+    //             qty: prevState.qty + 1 ,
+    //         }
+    //     })
 
-    }
+    // }
 
     //Decrese QtY
     decreaseQuantity = ()=> {
@@ -67,7 +67,8 @@ class CartItem extends React.Component {
                             alt="increase"
                             className="action-icons"
                             src="https://cdn-icons-png.flaticon.com/512/1828/1828926.png"
-                            onClick={this.increaseQuantity}   
+                            // onClick={this.increaseQuantity} 
+                            onClick={()=> this.props.onIncreaseQuantity(this.props.product)}  
                             />   {/* Can also write like this -> this.increaseQuantity.bind(this) */}
                         <img 
                             alt="decrease"
