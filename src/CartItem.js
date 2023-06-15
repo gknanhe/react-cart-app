@@ -1,8 +1,12 @@
 import React from "react";
 
 
+//as it dont have STATE make it FUNCTIONAL COMPONANT
+const CartItem = (props) => { //PROPS added by Default
 
-class CartItem extends React.Component {
+
+// class CartItem extends React.Component {
+
     // constructor(){
     //     super(); // to call the constructor of inherited class (React. Componant)
     //     this.state = {
@@ -45,10 +49,10 @@ class CartItem extends React.Component {
     //     })
     // }
     
-    render (){
-        console.log(this.props);
-        const { price,title, qty } = this.props.product;   //object destucturing
-        const { product, onIncreaseQuantity, onDecreaseQuantity , onDeleteProduct} =  this.props;
+    // render (){
+        // console.log(this.props);
+        const { price,title, qty } = props.product;   //object destucturing
+        const { product, onIncreaseQuantity, onDecreaseQuantity , onDeleteProduct} =  props;
         return(
             <div className="cart-item">
                 <div className="left-block"> 
@@ -90,7 +94,7 @@ class CartItem extends React.Component {
             </div>
         );
     }
-}
+// }
 
 const styles = {
     image: {
