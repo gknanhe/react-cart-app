@@ -2,6 +2,8 @@ import React from "react";
 // import CartItem from "./CartItem";
 import Navbar from "./Navbar";
 import Cart from "./Cart";
+import firebase from 'firebase/compat/app';
+
 
 class App extends React.Component {
 
@@ -9,32 +11,52 @@ class App extends React.Component {
       super(); // to call the constructor of inherited class (React. Componant)
       this.state = {
         products: [
-          {
-            price: 999,
-            title: "Mobile Phone",
-            qty: 10,
-            img: 'https://images.unsplash.com/photo-1546054454-aa26e2b734c7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8bW9iaWxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60',
-            id: 1
-          },
-          {
-            price: 99,
-            title: "Watch",
-            qty: 1,
-            img: 'https://images.unsplash.com/photo-1524805444758-089113d48a6d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8d2F0Y2h8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60',
-            id: 2
-          },
-          {
-            price: 9999,
-            title: "Laptop",
-            qty: 4,
-            img: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwZm9yJTIwc2FsZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            id: 3
-          },
-        ]
+          // {
+          //   price: 999,
+          //   title: "Mobile Phone",
+          //   qty: 10,
+          //   img: 'https://images.unsplash.com/photo-1546054454-aa26e2b734c7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8bW9iaWxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60',
+          //   id: 1
+          // },
+        
+        ],
+
+        loading: true
 
       }
 
     }
+
+    componentDidMount(){
+      firebase
+        .firestore()
+        .collection('products')
+        .get()
+        .then((snapshot) => {
+          console.log(snapshot);
+
+          // snapshot.docs.map((doc)=>{
+          //   console.log(doc.data());
+          //   return doc.data()
+          // });
+
+
+          const products = snapshot.docs.map((doc)=>{
+            console.log(doc.data());
+            const data = doc.data();
+
+            data['id'] = doc.id;
+
+            return data;
+          });
+
+          this.setState({
+            products
+          })
+
+        })
+    }
+
     //Handle increse Quantity
     handleIncreaseQuantity = (product) => {
       console.log('Hey plz increase the quantity of ', product);
@@ -73,7 +95,8 @@ class App extends React.Component {
       });
 
       this.setState({
-        products: items
+        products: items,
+        loading: false
       })
     }
 
@@ -101,7 +124,7 @@ class App extends React.Component {
     }
 
   render(){
-    const { products } = this.state;
+    const { products , loading} = this.state;
 
     return (
       <div className="App">
@@ -112,6 +135,8 @@ class App extends React.Component {
           onDecreaseQuantity={this.handleDecreaseQuantity}
           onDeleteProduct={this.handleDeleteProduct}
         />
+
+        {loading && <h3>Loading products...</h3>}
         <div style={{fontSize: 20 , padding: 10}}>Total: {this.getTotalPrice()}</div>
       </div>
     );
