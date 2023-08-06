@@ -1,4 +1,11 @@
-# Getting Started with Create React App
+# simple Cart App
+
+this is a simple cart app created using React. for the backend, it uses the firebase . user can add items to cart and also can remove it. can add multiple producs. 
+
+
+
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
